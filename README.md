@@ -24,7 +24,7 @@ Each sub-folder (e.g., ‘Mopping1’) contains:
 * Temporal sub-minimal files are the two frames of the minimal video. They are identified by their frame index in the original video. 
 (e.g., `v_MoppingFloor_g11_c03_TL_frame46_size_19x19.png` and `v_MoppingFloor_g11_c03_TL_frame51_size_19x19.png` to indicate the first and second frames respectively).
 
-The Mechanical Turk data file contains psychophysics data (recognition rate in percentage) for the minimal videos and their sub-minimal versions. 
+The file `mturk.xlsx` contains Mechanical Turk psychophysics data (recognition rate in percentage) for the minimal videos and their sub-minimal versions. 
 It also contains additional details about each minimal video including frame size, frame rate, and frame index. 
 
 
