@@ -6,15 +6,14 @@
 TBD
 
 ### Data
-This folder contains minimal video files used for our MTurk experiments, 
-arranged by sub-folders for each minimal video. 
+The `raw_data` folder contains minimal video files arranged by sub-folders. 
  
 Each sub-folder (e.g., ‘Mopping1’) contains:
-* A single minimal video file 
+* The folder `minimal` with a single minimal video file 
 (e.g., `v_MoppingFloor_g11_c03_inds_46_51_size_19x19_rate_2_O_TL.gif`)
-* The original video clip from which the minimal video was taken:
-(e.g., `v_MoppingFloor_g11_c03.avi` – taken from the UCF101 dataset)
-* A subfolder contains the spatial and temporal sub-minimal versions. 
+* The original video clip from which the minimal video was taken
+(e.g., `v_MoppingFloor_g11_c03.avi` downloaded from the UCF101 dataset)
+* The folder `sub_minimal` with the spatial and temporal sub-minimal versions. 
 * Spatial sub-minimal files are identified by the file name suffix. The suffix indicates the type of video frame reduction:
     * BL = Bottom Left crop (e.g., `v_MoppingFloor_g11_c03_inds_46_51_size_16x16_rate_2_O_TL_BL.gif`)
     * BR = Bottom Right crop (e.g., `v_MoppingFloor_g11_c03_inds_46_51_size_16x16_rate_2_O_TL_BR.gif`)
