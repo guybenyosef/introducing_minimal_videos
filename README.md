@@ -3,7 +3,7 @@
 
 ### Minimal videos
 
-TDB
+TBD
 
 ### Data
 This folder contains minimal video files used for our MTurk experiments, 
