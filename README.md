@@ -1,5 +1,10 @@
 # Introducing Minimal Videos
 
+
+### Minimal videos
+
+TDB
+
 ### Data
 This folder contains minimal video files used for our MTurk experiments, 
 arranged by sub-folders for each minimal video. 
@@ -31,3 +36,8 @@ It also contains the psycho-physics results (recognition rate in percentage) for
 ### Code
 
 TBD
+
+### Papers
+This repo contains data and code for the following papers:
+* Guy Ben-Yosef, Gabriel Kreiman, and Shimon Ullman. **Minimal videos: Trade-off between spatial and temporal information in human and machine vision**. *Cognition*, in press.
+* Guy Ben-Yosef, Gabriel Kreiman, and Shimon Ullman. **What can human minimal videos tell us about dynamic recognition models?** *Workshop on Bridging AI and Cognitive Science, International Conference on Learning Representations (ICLR)*, 2020 
