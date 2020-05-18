@@ -6,7 +6,7 @@
 ### The minimal videos data:
 | Class index   | Minimal Image Type | frame Size | # images  | Examples  | Hard negative examples |
 |:-------------:|:------------------:|:----------:|:---------:| --------- | -----------------------
-| 1             | Rowing             |   *30x30*  |   *TBD*   |![10](raw_data/Rowing1/minimal/v_Rowing_g10_c05_inds_56_5_rate_2_O_BR.gif) ![10](raw_data/Rowing6/minimal/v_Rowing_g21_c03_size_30_bbox_99_176_169_246_inds_39_69_rate_2_O.gif) ![10](raw_data/Rowing3/minimal//v_Rowing_g09_c01_size_30_inds_91_123_rate_2_O.gif)       |
+| 1             | Rowing             |   *30x30*  |   *TBD*   |![10](raw_data/Rowing1/minimal/v_Rowing_g10_c05_inds_56_5_rate_2_O_BR.gif) ![10](raw_data/Rowing6/minimal/v_Rowing_g21_c03_size_30_bbox_99_176_169_246_inds_39_69_rate_2_O.gif) ![10](raw_data/Rowing3/minimal//v_Rowing_g09_c01_size_30_inds_91_123_rate_2_O.gif)       | ![10](hardneg_samples/hardneg_rowing/v_CliffDiving_g25_c04_size_30_bbox_23_214_58_249_inds_11_26_rate_2_O.gif), ![10](hardneg_samples/hardneg_rowing/v_Haircut_g25_c04_size_30_bbox_41_175_12_146_inds_25_64_rate_2_O.gif), ![10](hardneg_samples/hardneg_rowing/v_HammerThrow_g25_c05_size_30_bbox_94_222_75_203_inds_29_34_rate_2_O.gif)
 | 2             | Biking             |   *30x30*  |   *TBD*   |![10](raw_data/Biking1/minimal/v_Biking_g15_c04_inds_20_26_size_16x16_rate_2_O_TL_TR.gif), ![10](raw_data/Biking2/minimal/v_Biking_g15_c04_inds_20_26_size_14x14_rate_2_O_BL.gif), ![10](raw_data/Biking3/minimal/v_Biking_g03_c01_size_20_inds_113_120_rate_2_O.gif)       |
 | 3             | Playing Violin     |   *30x30*  |   *TBD*   |![10](raw_data/PlayingViolin1/minimal/v_PlayingViolin_g11_c02_inds_16_26_size_14x14_rate_4_O_scl_BL.gif), ![10](raw_data/PlayingViolin2/minimal/v_PlayingViolin_g22_c04_inds_16_21_size_12x12_rate_5_O_BR.gif), ![10](raw_data/PlayingViolin3/minimal/v_PlayingViolin_g15_c04_inds_30_36_size_15x15_rate_2_O_BR_BL.gif)       |
 | 4             | Mopping            |   *30x30*  |   *TBD*   |![10](raw_data/Mopping1/minimal/v_MoppingFloor_g11_c03_inds_46_51_size_19x19_rate_2_O_TL.gif), ![10](raw_data/Mopping2/minimal/v_MoppingFloor_g11_c01_size_30_bbox_28_218_45_235_inds_18_44_rate_2_actualSize_26_size__O_TR.gif), ![10](samples/42.png)       |
@@ -43,12 +43,12 @@ It also contains additional details about each minimal video including frame siz
 * tqdm
 
 ##### Random crop for non-class examples at minimal video style 
-In your `data/` folder, create a new folder `negatives`, with sub-folders `negatives/train` and `negatives/test`. Then run
+To generate non-class video examples used for training minimal videos classifiers run, e.g.,
 ```bash
-python randomCrop.py -i path/to/your/video/dataset/train -o data/nonfour/train
-python randomCrop.py -i path/to/your/video/dataset/test -o data/nonfour/test
+python randomCrop.py -i path/to/your/video/dataset -o path/to/your/output/folder
 ```
-where `path/to/your/video/dataset/` is the path to some real-world videos dataset (e.g., UCF101).
+where `path/to/your/video/dataset/` is a folder containing real-world videos files (e.g., videos from UCF101), and 
+`path/to/your/output/folder` is a folder in which the generated video examples are saved.  
 
 You can also run this script with additional parameters, e.g.,  
 ```bash
@@ -58,7 +58,7 @@ where `ns` is the number of sets created to contain the negative examples (mutua
 negative examples.   
 
 To extract negative video examples from for specific action category at UCF101 dataset, run e.g.,
-```buildoutcfg
+```bash
 python randomCrop.py -i ucf_rowing -o data/minimal/negatives_video/nonrowing -ns 1 -lm 100000000
 ```
 where `data/minimal/negatives_video/nonrowing` is the folder in which the negative video examples will be stored.
@@ -71,5 +71,5 @@ git clone https://github.com/ChenjieXu/selective_search.git
 
 ### Papers
 This repo contains data and code for the following papers:
-* Guy Ben-Yosef, Gabriel Kreiman, and Shimon Ullman. **Minimal videos: Trade-off between spatial and temporal information in human and machine vision**. *Cognition*, in press.
-* Guy Ben-Yosef, Gabriel Kreiman, and Shimon Ullman. **What can human minimal videos tell us about dynamic recognition models?** *Workshop on Bridging AI and Cognitive Science, International Conference on Learning Representations (ICLR)*, 2020 
+* Guy Ben-Yosef, Gabriel Kreiman, and Shimon Ullman. [**Minimal videos: Trade-off between spatial and temporal information in human and machine vision**](https://doi.org/10.1016/j.cognition.2020.104263), *Cognition*, 201, 104263
+* Guy Ben-Yosef, Gabriel Kreiman, and Shimon Ullman. [**What can human minimal videos tell us about dynamic recognition models?**](https://baicsworkshop.github.io/pdf/BAICS_1.pdf) *Workshop on Bridging AI and Cognitive Science, International Conference on Learning Representations (ICLR)*, 2020 
