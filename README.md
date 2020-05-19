@@ -52,22 +52,25 @@ where `path/to/your/video/dataset/` is a folder containing real-world videos fil
 
 You can also run this script with additional parameters, e.g.,  
 ```bash
-python randomCrop.py -i /Users/gby/data/minimal_images/negatives/nonhorse_large/0/ -o /Users/gby/data/minimal_images/negtives/nonhorse/ -ns 10 -lm 400
+python randomCrop.py -i path/to/your/video/dataset -o path/to/your/output/folder -ns 10 -lm 400
 ```
-where `ns` is the number of sets created to contain the negative examples (mutually excluded), `lm` is the total number of generated 
+where `ns` is the number of sets created to contain the negative examples (mutually excluded), and `lm` is the maximal number of generated 
 negative examples.   
 
-To extract negative video examples from for specific action category at UCF101 dataset, run e.g.,
+To extract negative video examples for specific action category at UCF101 dataset, run e.g.,
 ```bash
 python randomCrop.py -i ucf_rowing -o data/minimal/negatives_video/nonrowing -ns 1 -lm 100000000
 ```
-where `data/minimal/negatives_video/nonrowing` is the folder in which the negative video examples will be stored.
+where `data/minimal/negatives_video/nonrowing` is the folder in which the negative video examples will be stored. You would also need to 
+download the [UCF101 dataset](https://www.crcv.ucf.edu/data/UCF101.php) and update the ucf101 path at `CONSTS.py`.
 
-Finally, two modes to search and crop frame windows are supported: a `sliding window` mode and a `selective search` mode.
-To use the selective search mode (default and recommended option) clone this repo:
+Finally, the script for generating of negative examples includes two modes for cropping frame windows: 
+a `sliding window` mode and a `selective search` mode.
+To use the selective search mode (default and recommended option) clone [this repo](https://github.com/ChenjieXu/selective_search.git):
 ```bash
 git clone https://github.com/ChenjieXu/selective_search.git
-```            
+```
+and update the path to your local copy at `CONSTS.py`
 
 ##### Training a classifier
 TBD
