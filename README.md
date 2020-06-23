@@ -111,7 +111,7 @@ python eval.py with weights=storage/logs/RowingOrNot/1/ResNet3D18/9/weights_Rowi
 ```
 
 ### Papers
-If you use this repo please cite this paper:
+If you are using this repo please cite the following paper:
 * Guy Ben-Yosef, Gabriel Kreiman, and Shimon Ullman. [**Minimal videos: Trade-off between spatial and temporal information in human and machine vision**](https://doi.org/10.1016/j.cognition.2020.104263), *Cognition*, 201, 104263, August 2020
 
 Other relevant papers:          
