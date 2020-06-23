@@ -6,7 +6,7 @@
 ### The minimal videos data:
 | Class index   | Minimal Image Type | frame Size | # images  | Examples  | Hard negative examples |
 |:-------------:|:------------------:|:----------:|:---------:| --------- | -----------------------
-| 1             | Rowing             |   *30x30*  |   *TBD*   |![10](raw_data/Rowing1/minimal/v_Rowing_g10_c05_inds_56_5_rate_2_O_BR.gif), ![10](raw_data/Rowing6/minimal/v_Rowing_g21_c03_size_30_bbox_99_176_169_246_inds_39_69_rate_2_O.gif), ![10](raw_data/Rowing3/minimal//v_Rowing_g09_c01_size_30_inds_91_123_rate_2_O.gif)       | ![10](hardneg/demo_hardneg_rowing/v_CliffDiving_g25_c04_size_30_bbox_23_214_58_249_inds_11_26_rate_2_O.gif), ![10](hardneg/demo_hardneg_rowing/v_Haircut_g25_c04_size_30_bbox_41_175_12_146_inds_25_64_rate_2_O.gif), ![10](hardneg/demo_hardneg_rowing/v_HammerThrow_g25_c05_size_30_bbox_94_222_75_203_inds_29_34_rate_2_O.gif)
+| 1             | Rowing             |   *30x30*  |   *30*   |![10](raw_data/Rowing1/minimal/v_Rowing_g10_c05_inds_56_5_rate_2_O_BR.gif), ![10](raw_data/Rowing6/minimal/v_Rowing_g21_c03_size_30_bbox_99_176_169_246_inds_39_69_rate_2_O.gif), ![10](raw_data/Rowing3/minimal//v_Rowing_g09_c01_size_30_inds_91_123_rate_2_O.gif)       | ![10](hardneg/demo_hardneg_rowing/v_CliffDiving_g25_c04_size_30_bbox_23_214_58_249_inds_11_26_rate_2_O.gif), ![10](hardneg/demo_hardneg_rowing/v_Haircut_g25_c04_size_30_bbox_41_175_12_146_inds_25_64_rate_2_O.gif), ![10](hardneg/demo_hardneg_rowing/v_HammerThrow_g25_c05_size_30_bbox_94_222_75_203_inds_29_34_rate_2_O.gif)
 | 2             | Biking             |   *30x30*  |   *TBD*   |![10](raw_data/Biking1/minimal/v_Biking_g15_c04_inds_20_26_size_16x16_rate_2_O_TL_TR.gif), ![10](raw_data/Biking2/minimal/v_Biking_g15_c04_inds_20_26_size_14x14_rate_2_O_BL.gif), ![10](raw_data/Biking3/minimal/v_Biking_g03_c01_size_20_inds_113_120_rate_2_O.gif)       |
 | 3             | Playing Violin     |   *30x30*  |   *TBD*   |![10](raw_data/PlayingViolin1/minimal/v_PlayingViolin_g11_c02_inds_16_26_size_14x14_rate_4_O_scl_BL.gif), ![10](raw_data/PlayingViolin2/minimal/v_PlayingViolin_g22_c04_inds_16_21_size_12x12_rate_5_O_BR.gif), ![10](raw_data/PlayingViolin3/minimal/v_PlayingViolin_g15_c04_inds_30_36_size_15x15_rate_2_O_BR_BL.gif)       |
 | 4             | Mopping            |   *30x30*  |   *TBD*   |![10](raw_data/Mopping1/minimal/v_MoppingFloor_g11_c03_inds_46_51_size_19x19_rate_2_O_TL.gif), ![10](raw_data/Mopping2/minimal/v_MoppingFloor_g11_c01_size_30_bbox_28_218_45_235_inds_18_44_rate_2_actualSize_26_size__O_TR.gif), ![10](samples/42.png)       |
@@ -76,7 +76,7 @@ and update the path to your local copy at `CONSTS.py`
 ###### Training a classifier
 Run the `mini` option:
 ```bash
-CUDA_VISIBLE_DEVICES=3 python train.py with mini seed=113
+python train.py with mini
 ```
 
 ###### Evaluating classification results 
@@ -89,11 +89,11 @@ or on a small naive set:
 python eval.py with weights=storage/logs/RowingOrNot/1/ResNet3D18/1/weights_RowingOrNot_ResNet3D18_best.pth subset=277
 ```
 Output: Number of incorrect detections is 8 out of 281. Classification accuracy is.. 0.971530, AUC=0.986. 
-
+(notice additional flags such as `plot`)
 
 Eval on a small hard negatives set:
 ```bash
-python eval.py with weights=storage/logs/RowingOrNot/1/ResNet3D18/9/weights_RowingOrNot_ResNet3D18_best.pth hard
+python eval.py with weights=storage/logs/RowingOrNot/1/ResNet3D18/1/weights_RowingOrNot_ResNet3D18_best.pth hard
 ```
 Output: Number of incorrect detections is 177 out of 255. Classification accuracy is.. 0.305882, AUC=0.647
 
