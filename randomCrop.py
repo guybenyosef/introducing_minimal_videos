@@ -17,11 +17,12 @@ if os.path.exists(CONSTS.SELECTIVE_SEARCH_DIR):
 def argument_parser():
     parser = argparse.ArgumentParser(description='Process arguments')
     parser.add_argument('-m', '--mode', default='selective', help='', type=str)
-    parser.add_argument('-i', '--input_path', default='/Users/gby/data/minimal_images/negatives/nonhorse_large/1/', help='', type=str)
-    parser.add_argument('-o', '--output_path', default='/Users/gby/data/minimal_videos/negatives/nonrowing/', help='', type=str)
+    parser.add_argument('-i', '--input_path', default='ucf_but_rowing', help='', type=str)
+    parser.add_argument('-o', '--output_path', default='tmp', help='', type=str)
     parser.add_argument('-lm', '--limit', default=int(1e4), help='', type=int)
     parser.add_argument('-s', '--minimalImage_size', default=30, help='', type=int)
     parser.add_argument('-ns', '--num_sets', default=1, help='', type=int)
+    parser.add_argument('-fi', '--frame_intervals', default=20, help='', type=int)
 
     return parser.parse_args()
 
@@ -82,7 +83,10 @@ def selective_search_detection(input_examples, output_path, minimalImage_size, g
                 cap.set(cv2.CAP_PROP_POS_FRAMES, fram_indx)
                 ret, first_frame = cap.read()
 
+                #with np.errstate(divide='ignore', invalid='ignore'):
                 boxes = selective_search.selective_search(first_frame, mode='fast')
+                # boxes_filter (optional)
+                boxes = selective_search.box_filter(boxes, min_size=20, topN=80)
                 random.shuffle(boxes)
                 if limit < 10001:
                     limit_per_image = 100
@@ -171,36 +175,20 @@ def gen_data(mode, input_filenames, output_path, num_sets, minimalImage_size, ge
         else:
             os.error("incorrect mode name")
 
-
-def get_voc_classification_filenames(voc_folder_path, category='horse'):
-
-    voc_classification_names_folder = os.path.join(voc_folder_path, 'ImageSets/Main/')
-    voc_classification_images_folder = os.path.join(voc_folder_path, 'JPEGImages/')
-
-    all_voc_classification_names = make_dataset_txtfile(os.path.join(voc_classification_names_folder, 'train.txt')) + \
-                                   make_dataset_txtfile(os.path.join(voc_classification_names_folder, 'val.txt')) + \
-                                   make_dataset_txtfile(os.path.join(voc_classification_names_folder, 'trainval.txt'))
-    category_voc_classification_names = make_dataset_txtfile(os.path.join(voc_classification_names_folder, category + '_train.txt')) + \
-                                   make_dataset_txtfile(os.path.join(voc_classification_names_folder, category + '_val.txt')) + \
-                                   make_dataset_txtfile(os.path.join(voc_classification_names_folder, category + '_trainval.txt'))
-
-    all_but_category_voc_classification_names = list(set(all_voc_classification_names) - set(category_voc_classification_names))
-
-    # add full path
-    all_but_category_voc_classification_names = [os.path.join(voc_classification_images_folder, filename + '.jpg') for filename in all_but_category_voc_classification_names]
-
-    return all_but_category_voc_classification_names
-
-
-
-def get_ucf_classification_filenames(ucf_folder_path, category='Rowing'):
+def get_ucf_class_filenames(ucf_folder_path, category='Rowing'):
     list_of_ucf101_categories = os.listdir(ucf_folder_path)
-    all_but_category_voc_classification_names = []
+    if category in list_of_ucf101_categories:
+        ucf_category_filenames = make_dataset(os.path.join(ucf_folder_path, category), ext='avi')
+    return ucf_category_filenames
+
+
+def get_ucf_all_but_class_filenames(ucf_folder_path, category='Rowing'):
+    list_of_ucf101_categories = os.listdir(ucf_folder_path)
+    all_but_category_ucf_classification_names = []
     for ucf_category in list_of_ucf101_categories:
-        if ucf_category!=category:
-            all_but_category_voc_classification_names.extend(make_dataset(os.path.join(ucf_folder_path,ucf_category), ext='avi'))
-    #all_but_category_voc_classification_names = [os.path.join(ucf_folder_path, 'v_MoppingFloor_g01_c01.avi')]
-    return all_but_category_voc_classification_names
+        if ucf_category != category:
+            all_but_category_ucf_classification_names.extend(make_dataset(os.path.join(ucf_folder_path,ucf_category), ext='avi'))
+    return all_but_category_ucf_classification_names
 
 # ===========================
 # Main
@@ -213,13 +201,21 @@ if __name__ == '__main__':
     output_path = args.output_path
 
     if input_path == 'ucf_rowing':
+        # get all rowing ucf files:
+        input_filenames = get_ucf_class_filenames(ucf_folder_path=CONSTS.UCF_DIR, category='Rowing')
+    elif input_path == 'ucf_but_rowing':
         # get all nonrowing ucf files:
-        input_filenames = get_ucf_classification_filenames(ucf_folder_path=CONSTS.UCF_DIR, category='Rowing')
+        input_filenames = get_ucf_all_but_class_filenames(ucf_folder_path=CONSTS.UCF_DIR, category='Rowing')
+    elif input_path == 'ucf_tennis':
+        input_filenames = get_ucf_class_filenames(ucf_folder_path=CONSTS.UCF_DIR, category='TennisSwing')
+    elif input_path == 'ucf_hammer':
+        input_filenames = get_ucf_class_filenames(ucf_folder_path=CONSTS.UCF_DIR, category='HammerThrow')
+
     else:
         input_filenames = make_dataset(dir=input_path)
 
     gen_data(mode=args.mode, input_filenames=input_filenames, output_path=output_path,
-            num_sets=args.num_sets, minimalImage_size=args.minimalImage_size, gen_frame_rate=2, frame_intervals=20, limit=args.limit)
+            num_sets=args.num_sets, minimalImage_size=args.minimalImage_size, gen_frame_rate=2, frame_intervals=args.frame_intervals, limit=args.limit)
 
 
 
