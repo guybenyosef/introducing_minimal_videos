@@ -80,31 +80,30 @@ CUDA_VISIBLE_DEVICES=3 python train.py with mini seed=113
 ```
 
 ###### Evaluating classification results 
+Eval on naive set:
 ```bash
-CUDA_VISIBLE_DEVICES=0 python eval.py with weights=storage/logs/RowingOrNot/1/ResNet3D18/2/weights_RowingOrNot_ResNet3D18_ep_100.pth
-```
-or, 
+python eval.py with weights=storage/logs/RowingOrNot/1/ResNet3D18/1/weights_RowingOrNot_ResNet3D18_best.pth
+``` 
+or on a small naive set:
 ```bash
-CUDA_VISIBLE_DEVICES=0 python eval.py with weights=storage/logs/RowingOrNot/1/ResNet3D18/2/weights_RowingOrNot_ResNet3D18_ep_100.pth sport
-```
-
-Eval small naive set:
-```bash
-python eval.py with weights=storage/logs/RowingOrNot/1/ResNet3D18/9/weights_RowingOrNot_ResNet3D18_best.pth subset=277
+python eval.py with weights=storage/logs/RowingOrNot/1/ResNet3D18/1/weights_RowingOrNot_ResNet3D18_best.pth subset=277
 ```
 Output: Number of incorrect detections is 8 out of 281. Classification accuracy is.. 0.971530, AUC=0.986. 
 
 
-Eval small hard set:
+Eval on a small hard negatives set:
 ```bash
 python eval.py with weights=storage/logs/RowingOrNot/1/ResNet3D18/9/weights_RowingOrNot_ResNet3D18_best.pth hard
 ```
 Output: Number of incorrect detections is 177 out of 255. Classification accuracy is.. 0.305882, AUC=0.647
 
-###### Evaluating classification results 
+
+Eval on a set of spatial sub-minimal videos:
 ```bash
-python vote_for_negatives.py --set_id naive --exp_inds 1 2 3 4 5
+python eval.py with weights=storage/logs/RowingOrNot/1/ResNet3D18/9/weights_RowingOrNot_ResNet3D18_best.pth submirc
 ```
+Output: Number of incorrect detections is 11 out of 16. Classification accuracy is.. 0.3125
+
 
 ### Papers
 This repo contains data and code for the following papers:
