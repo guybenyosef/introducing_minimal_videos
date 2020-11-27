@@ -113,6 +113,7 @@ python eval.py with weights=storage/logs/RowingOrNot/1/ResNet3D18/9/weights_Rowi
 ### Papers
 If you are using this repo please cite the following paper:
 * Guy Ben-Yosef, Gabriel Kreiman, and Shimon Ullman. [**Minimal videos: Trade-off between spatial and temporal information in human and machine vision**](https://doi.org/10.1016/j.cognition.2020.104263), *Cognition*, 201, 104263, August 2020
+[**PDF**](https://www.researchgate.net/publication/340796972_Minimal_videos_Trade-off_between_spatial_and_temporal_information_in_human_and_machine_vision)
 
 Other relevant papers:          
 * Guy Ben-Yosef, Gabriel Kreiman, and Shimon Ullman. [**What can human minimal videos tell us about dynamic recognition models?**](https://baicsworkshop.github.io/pdf/BAICS_1.pdf) *Workshop on Bridging AI and Cognitive Science, International Conference on Learning Representations (ICLR)*, 2020 
