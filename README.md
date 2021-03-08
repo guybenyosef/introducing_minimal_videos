@@ -118,6 +118,6 @@ If you are using this repo please cite the following paper:
 Other relevant papers:          
 * Guy Ben-Yosef, Gabriel Kreiman, and Shimon Ullman. [**What can human minimal videos tell us about dynamic recognition models?**](https://baicsworkshop.github.io/pdf/BAICS_1.pdf) *Workshop on Bridging AI and Cognitive Science, International Conference on Learning Representations (ICLR)*, 2020 
 
-#### Full Interpretation code and data
+### Full interpretation of minimal images (code and data)
 Related work on full interpretation of minimal recognizable images is in 
 this [github repo](https://github.com/guybenyosef/fullInterpretation).
